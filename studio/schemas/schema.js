@@ -1,0 +1,126 @@
+// First, we must import the schema creator
+import createSchema from 'part:@sanity/base/schema-creator'
+// Then import schema types from any plugins that might expose them
+import schemaTypes from 'all:part:@sanity/base/schema-type'
+
+// We import object and document schemas
+import blockContent from './blockContent'
+import crewMember from './crewMember'
+import castMember from './castMember'
+import movie from './movie'
+import person from './person'
+import screening from './screening'
+import plotSummary from './plotSummary'
+import plotSummaries from './plotSummaries'
+
+// Then we give our schema to the builder and provide the result to Sanity
+export default createSchema({
+  // We name our schema
+  name: 'default',
+  // Then proceed to concatenate our document type
+  // to the ones provided by any plugins that are installed
+  types: schemaTypes.concat(
+    [
+    {
+        name:'users',
+        title:'users',
+        type:'document',
+        fields:[
+          { 
+          name:'userName',
+          title:'User Name',
+          type:'string',
+          },
+          {
+           name:'walletAddress',
+           title:'wallet Address',
+           type:'string',
+          },
+          {
+            name:'profileImage',
+            title:'profile Image',
+            type:'image',
+          },
+          
+          {
+            name:'twitteerHandle',
+            title:'Twitter Handle',
+            type:'string',
+  
+          },
+          {
+                  name:'igHandle',
+                  title:'Instagram',
+                  type:'string',
+          },
+        ],
+      },
+      {
+          name:'marketItem',
+          title:'Market Items',
+          type:'document',
+          fields:[
+            {
+            name:'title',
+            title:'Title',
+            type:'string',
+          },
+          {
+            name:'contractAdress',
+            title:'Contract Address',
+            type:'string',
+          },
+          {
+            name:'description',
+            title:'Description',
+            type:'string',
+          },
+            {
+        name:'createdBy',
+        title:'Created By',
+        type:'reference',
+        to:[{type:'users'}],
+},
+       {
+         name:'volumeTrade',
+         title:'volume Traded',
+         type:'number',
+  
+       },
+       {
+         name:'floorprice',
+         title:'Floor price',
+         type:'number',
+       },
+       {
+         name:'owners',
+         title:'Owners',
+         type:'array',
+         of:[{type:'reference',to:[{type:'users'}]}],
+       },
+       {
+        name:'profileImage',
+        title:'profile Image',
+        type:'image',
+      },
+       {
+        name:'bannerImage',
+        title:'Banner Image',
+        type:'image',
+      },
+
+
+
+
+          ],
+      },
+      
+    ]
+     
+  ),
+})
+  
+  
+  
+
+    
